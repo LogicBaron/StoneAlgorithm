@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ans = {{}};
+
+        for (int i=0; i<nums.size(); i++) {
+            int l = ans.size();
+            for (int j=0; j<l; j++) {
+                vector<int> tmp = ans[j];
+                tmp.push_back(nums[i]);
+                ans.push_back(tmp);
+            }
+        }   
+
+        return ans;
+    }
+};

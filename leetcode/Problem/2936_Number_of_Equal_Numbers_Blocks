@@ -1,0 +1,31 @@
+/**
+ * Definition for BigArray.
+ * class BigArray {
+ * public:
+ *     BigArray(vector<int> elements);
+ *     int at(long long index);
+ *     long long size();
+ * };
+ */
+class Solution {
+public:
+
+    int countBlocksPart(BigArray* nums, long long l, long long r) {
+        if (nums->at(l) == nums->at(r)) return 1;
+
+        long long mid = (l+r)>>1;
+
+        int rst1 = countBlocksPart(nums, l, mid);
+        int rst2 = countBlocksPart(nums, mid+1, r);
+
+        if (nums->at(mid) == nums->at(mid+1)) return rst1 + rst2 - 1;
+        return rst1 + rst2;
+    }
+
+    int countBlocks(BigArray* nums) {
+        long long l = 0;
+        long long r = nums->size()-1;
+
+        return countBlocksPart(nums, l, r);
+    }
+};
